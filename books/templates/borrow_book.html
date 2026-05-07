@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">📖 Borrow Book</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h5>Book Details:</h5>
+                    <p>
+                        <strong>Title:</strong> {{ book.title }}<br>
+                        <strong>Author:</strong> {{ book.author }}<br>
+                        <strong>ISBN:</strong> {{ book.isbn }}<br>
+                        <strong>Available Copies:</strong> {{ book.available_copies }}
+                    </p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label">👤 User ID:</label>
+                        <input type="number" name="user_id" id="user_id" class="form-control" required placeholder="Enter user ID number">
+                        <small class="text-muted">Enter the ID of the user who wants to borrow this book</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary me-md-2">✅ Confirm Borrow</button>
+                        <a href="{% url 'book_list' %}" class="btn btn-secondary">❌ Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
